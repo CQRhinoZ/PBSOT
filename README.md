@@ -22,7 +22,7 @@ Group Re-identification (GReID) seeks to accurately associate group images with 
 - Clone this repo
 
 ```
-git clone https://github.com/CQRhinoZ/GUGEN
+git clone https://github.com/CQRhinoZ/PBSOT
 ```
 
 ## Project Structure
