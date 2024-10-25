@@ -9,7 +9,7 @@ Group Re-identification (GReID) seeks to accurately associate group images with 
 
 ## Performance
 ## Performance
-TABLE I: Comparison of the proposed method with the state-of-the-art approaches on the CSG and RoadGroup datasets
+TABLE I : Comparison of the proposed method with the state-of-the-art approaches on the CSG and RoadGroup datasets
 |        Method       | Publication | CSG   | CSG   |  CSG   |  CSG   | RoadGroup    | RoadGroup   | RoadGroup    | RoadGroup    |
 |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |
 |                       |       | mAP   | rank1 | rank5 | rank10 | mAP   | rank1 | rank5 | rank10                         |
@@ -31,8 +31,21 @@ TABLE I: Comparison of the proposed method with the state-of-the-art approaches 
 | UMSOT | IJCV 2024                    | 92.60  | 93.60  | 97.30  | 98.30   | 91.70  | 88.90  | 95.10  | 98.80  |
 | TSN+ | IEEE TIM 2024                    | 96.57 | 96.30  | 98.13 | 99.00   | 96.70  | 95.53 | 98.34 | 99.80  |
 | SSRG | TPAMI 2024                   | -     | 90.80  | 96.20  | 97.40   | -     | -     | -     | -  |
-| Ours | -                            | 95.12 | **96.35** | 98.20  | 98.61  | 96.97 | 95.06 | 98.77 |  99.80  | 
+| Ours | -                            | 95.12 | **96.35** | **98.20**  | 98.61  | **96.97** | 95.06 | **98.77** |  99.80  | 
 
+TABLE II : Comparison of the proposed method with the state-of-the-art approaches on the SYSU-Group dataset
+| Method | Publication | SYSU-Group | SYSU-Group |  SYSU-Group   |  SYSU-Group   |
+|  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |
+| HistLBP | ECCV 2014  | 10.00 | 21.50| 40.10|  51.30 |
+| LOMO | CVPR 2015 | 25.30|  51.90 | 74.40|  81.10 |
+| WHOS | TPAMI 2015 | 37.60 | 67.90 | 86.70 | 92.90 |
+| GOG | CVPR 2016 | 73.20 | 86.80 | 92.80 | 42.90 |
+| SVIGR | Neucom 2020 | 80.20| 94.80 | 98.60|  99.90 |
+| PCB | TPAMI 2021 | 49.50 | 77.00 | 91.60|  94.90 |
+| MACG | TPAMI 2023 | 80.80 | 90.70 | 97.40 | 98.70 |
+| SOT | AAAI 2022| 97.00 | 99.40 | 99.70 | 99.90 |
+| UMSOT | IEEE TIM 2024  | 97.20 | 99.60 | 99.70 | 99.90 |
+| Ours  | - | **98.14** | **99.97** | **99.99** | **99.99** | 
 
 ## Architecture
 
