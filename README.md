@@ -29,9 +29,9 @@ TABLE I: Comparison of the proposed method with the state-of-the-art approaches 
 | MACG                    | TPAMI 2023                   | -     | 63.20  | 75.40  | 79.70   | -     | 84.50  | 95.00    | 96.90              |
 | CPM*                    | CVPR 2023                    | 51.45 | 88.57 | -     | -      | -     | -     | -     | -                       |
 | UMSOT                   | IJCV 2024                    | 92.60  | 93.60  | 97.30  | 98.30   | 91.70  | 88.90  | 95.10  | 98.80               |
-| TSN+     | IEEE TIM 2024                    | \textbf{96.57} | 96.30  | 98.13 | \textbf{99.00}   | 96.70  | \textbf{95.53} | 98.34 | 99.80       |
+| TSN+     | IEEE TIM 2024                    | 96.57 | 96.30  | 98.13 | 99.00   | 96.70  | 95.53 | 98.34 | 99.80       |
 | SSRG                    | TPAMI 2024                   | -     | 90.80  | 96.20  | 97.40   | -     | -     | -     | -              |
-| Ours                    | -                            | 95.12 | \textbf{96.35} | \textbf{98.20}  | 98.61  | \textbf{96.97} | 95.06 | \textbf{98.77} | \multicolumn{1}{l}{\textbf{ 99.80}}  | 
+| Ours                    | -                            | 95.12 | **96.35** | 98.20  | 98.61  | 96.97 | 95.06 | 98.77 |  99.80  | 
 
 
 ## Architecture
