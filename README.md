@@ -11,7 +11,7 @@ Group Re-identification (GReID) seeks to accurately associate group images with 
 ## Performance
 TABLE I: Comparison of the proposed method with the state-of-the-art approaches on the CSG and RoadGroup datasets
 |        Method       | Publication | CSG   | CSG   |  CSG   |  CSG   | RoadGroup    | RoadGroup   | RoadGroup    | RoadGroup    |
-|  ---  |  ---  | : --- : | : --- : | : --- : | : --- : | : --- : | : --- : | : --- : | : --- : |
+|  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |  ---  |
 |                       |       | mAP   | rank1 | rank5 | rank10 | mAP   | rank1 | rank5 | rank10                         |
 | CRRRO-BRO               | BMVC 2009                    | -     | 10.40  | 25.80  | 37.50   | -     | 17.80  | 34.60 | 48.10  |
 | Covariance              | ICPR 2010                    | -     | 16.50  | 34.10  | 47.90   | -     | 38.00    | 61.00    | 73.10 |
