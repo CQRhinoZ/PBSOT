@@ -73,7 +73,7 @@ After installing the dependency:
     pip install -r requirements.txt
 
 ## Train
-
+This is pre-trained model [MODEL](https://drive.google.com/file/d/1rMkUf7FbHt7pU-DLL6eJrHU9Cg0jFLbx/view?usp=sharing)
 
 
 ## Citation
