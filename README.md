@@ -1,6 +1,6 @@
 # Parallel Branches-based Second-Order Transformer for Robust Group Re-identification with Layout-Guided Occlusion Mitigation
 
-This is a pytorch implementation of 《Parallel Branches-based Second-Order Transformer for Robust Group Re-identification with Layout-Guided Occlusion Mitigation》(IEEE TIM 2024, under review). 
+This is a pytorch implementation of 《Parallel Branches-based Second-Order Transformer for Robust Group Re-identification with Layout-Guided Occlusion Mitigation》(ESWA, under review). 
 
 
 ## Abstract
