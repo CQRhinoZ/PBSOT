@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=1,2,3,4 python3 tools/train_net.py --config-file ./configs/CSG/bagtricks_gvit.yml --num-gpus 4

@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0 python3 tools/train_net.py --config-file configs/SYSU/bagtricks_gvit.yml --eval_only true
