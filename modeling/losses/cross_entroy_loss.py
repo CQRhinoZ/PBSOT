@@ -1,7 +1,13 @@
+# encoding: utf-8
+"""
+@author:  l1aoxingyu
+@contact: sherlockliao01@gmail.com
+"""
 import torch
 import torch.nn.functional as F
 
-from ..utils.events import get_event_storage
+from fastreid.utils.events import get_event_storage
+
 
 def log_accuracy(pred_class_logits, gt_classes, topk=(1,)):
     """

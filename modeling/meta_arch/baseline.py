@@ -1,17 +1,22 @@
+# encoding: utf-8
+"""
+@author:  liaoxingyu
+@contact: sherlockliao01@gmail.com
+"""
+import pdb
+
 import torch
 from torch import nn
 
-from ..config import configurable
-from ..model import pbsot
-from ..heads import build_heads
-
+from fastreid.config import configurable
+from fastreid.modeling.backbones import build_backbone
+from fastreid.modeling.heads import build_heads
+from fastreid.modeling.losses import *
 from .build import META_ARCH_REGISTRY
-from ..losses import *
+
 import numpy as np
 import random
 import copy
-
-
 
 @META_ARCH_REGISTRY.register()
 class Baseline(nn.Module):
@@ -51,12 +56,12 @@ class Baseline(nn.Module):
         self.heads_p = heads_p
         self.heads_l_1 = copy.deepcopy(heads_p)
         self.heads_l_2 = copy.deepcopy(heads_p)
-        self.heads_l_3 = copy.deepcopy(heads_p)
-        self.heads_l_4 = copy.deepcopy(heads_p)
-        self.heads_l_5 = copy.deepcopy(heads_p)
-        self.heads_l_6 = copy.deepcopy(heads_p)
-        self.heads_l_7 = copy.deepcopy(heads_p)
-        self.heads_l_8 = copy.deepcopy(heads_p)
+        # self.heads_l_3 = copy.deepcopy(heads_p)
+        # self.heads_l_4 = copy.deepcopy(heads_p)
+        # self.heads_l_5 = copy.deepcopy(heads_p)
+        # self.heads_l_6 = copy.deepcopy(heads_p)
+        # self.heads_l_7 = copy.deepcopy(heads_p)
+        # self.heads_l_8 = copy.deepcopy(heads_p)
         # self.heads_l_9 = copy.deepcopy(heads_p)
         # self.heads_l_10 = copy.deepcopy(heads_p)
 
@@ -69,7 +74,7 @@ class Baseline(nn.Module):
     def from_config(cls, cfg):
         cfg0 = cfg.clone()
         if cfg0.is_frozen(): cfg0.defrost()
-        backbone = pbsot(cfg0)
+        backbone = build_backbone(cfg0)
         cfg0.MODEL.HEADS.NUM_CLASSES = cfg.MODEL.HEADS.NUM_CLASSES[0]
 
         heads_g = build_heads(cfg0)
@@ -227,18 +232,18 @@ class Baseline(nn.Module):
         o1_feat = o_list[0]['features']
         o2_p = o_list[1]['cls_outputs']
         o2_feat = o_list[1]['features']
-        o3_p = o_list[2]['cls_outputs']
-        o3_feat = o_list[2]['features']
-        o4_p = o_list[3]['cls_outputs']
-        o4_feat = o_list[3]['features']
-        o5_p = o_list[4]['cls_outputs']
-        o5_feat = o_list[4]['features']
-        o6_p = o_list[5]['cls_outputs']
-        o6_feat = o_list[5]['features']
-        # o7_p = o_list[6]['cls_outputs']
-        o7_feat = o_list[6]['features']
-        o8_p = o_list[7]['cls_outputs']
-        o8_feat = o_list[7]['features']
+        # o3_p = o_list[2]['cls_outputs']
+        # o3_feat = o_list[2]['features']
+        # o4_p = o_list[3]['cls_outputs']
+        # o4_feat = o_list[3]['features']
+        # o5_p = o_list[4]['cls_outputs']
+        # o5_feat = o_list[4]['features']
+        # o6_p = o_list[5]['cls_outputs']
+        # o6_feat = o_list[5]['features']
+        # # o7_p = o_list[6]['cls_outputs']
+        # o7_feat = o_list[6]['features']
+        # o8_p = o_list[7]['cls_outputs']
+        # o8_feat = o_list[7]['features']
         # o9_p = o_list[8]['cls_outputs']
         # o9_feat = o_list[8]['features']
         # o10_p = o_list[9]['cls_outputs']
@@ -270,7 +275,7 @@ class Baseline(nn.Module):
                 gt_labels_g,
                 ce_kwargs.get('eps'),
                 ce_kwargs.get('alpha')
-            ) * ce_kwargs.get('scale')
+            ) * 1
             # *ce_kwargs.get('scale')
             loss_dict['loss_cls_p'] = cross_entropy_loss(
                 cls_outputs_p,
@@ -284,8 +289,22 @@ class Baseline(nn.Module):
                 gt_labels_g,
                 ce_kwargs.get('eps'),
                 ce_kwargs.get('alpha')
-            ) * ce_kwargs.get('scale')
+            ) * 1
+            #
+            # loss_dict['loss_cls__g_local'] = cross_entropy_loss(
+            #     cls_outputs_g_local,
+            #     gt_labels_g,
+            #     ce_kwargs.get('eps'),
+            #     ce_kwargs.get('alpha')
+            # ) * ce_kwargs.get('scale')
 
+
+            # loss_dict['loss_cls_gc'] = cross_entropy_loss(
+            #     cls_outputs_gc,
+            #     gt_labels_g,
+            #     ce_kwargs.get('eps'),
+            #     ce_kwargs.get('alpha')
+            # ) * ce_kwargs.get('scale')
 
         if 'TripletLoss' in loss_names:
             tri_kwargs = self.loss_kwargs.get('tri')
@@ -295,7 +314,7 @@ class Baseline(nn.Module):
                 tri_kwargs.get('margin'),
                 tri_kwargs.get('norm_feat'),
                 tri_kwargs.get('hard_mining')
-            ) * tri_kwargs.get('scale')
+            ) * 1
             # *tri_kwargs.get('scale')
             loss_dict['loss_triplet_p'] = triplet_loss(
                 pred_features_p,
@@ -319,49 +338,49 @@ class Baseline(nn.Module):
                 tri_kwargs.get('norm_feat'),
                 tri_kwargs.get('hard_mining')
             ) * tri_kwargs.get('scale')
-            loss_dict['loss_triplet_l3'] = triplet_loss(
-                o3_feat,
-                gt_labels_p,
-                tri_kwargs.get('margin'),
-                tri_kwargs.get('norm_feat'),
-                tri_kwargs.get('hard_mining')
-            ) * tri_kwargs.get('scale')
-            loss_dict['loss_triplet_l4'] = triplet_loss(
-                o4_feat,
-                gt_labels_p,
-                tri_kwargs.get('margin'),
-                tri_kwargs.get('norm_feat'),
-                tri_kwargs.get('hard_mining')
-            ) * tri_kwargs.get('scale')
-            loss_dict['loss_triplet_l5'] = triplet_loss(
-                o5_feat,
-                gt_labels_p,
-                tri_kwargs.get('margin'),
-                tri_kwargs.get('norm_feat'),
-                tri_kwargs.get('hard_mining')
-            ) * tri_kwargs.get('scale')
-            loss_dict['loss_triplet_l6'] = triplet_loss(
-                o6_feat,
-                gt_labels_p,
-                tri_kwargs.get('margin'),
-                tri_kwargs.get('norm_feat'),
-                tri_kwargs.get('hard_mining')
-            ) * tri_kwargs.get('scale')
-            loss_dict['loss_triplet_l7'] = triplet_loss(
-                o7_feat,
-                gt_labels_p,
-                tri_kwargs.get('margin'),
-                tri_kwargs.get('norm_feat'),
-                tri_kwargs.get('hard_mining')
-            ) * tri_kwargs.get('scale')
-
-            loss_dict['loss_triplet_l8'] = triplet_loss(
-                o8_feat,
-                gt_labels_p,
-                tri_kwargs.get('margin'),
-                tri_kwargs.get('norm_feat'),
-                tri_kwargs.get('hard_mining')
-            ) * tri_kwargs.get('scale')
+            # loss_dict['loss_triplet_l3'] = triplet_loss(
+            #     o3_feat,
+            #     gt_labels_p,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
+            # loss_dict['loss_triplet_l4'] = triplet_loss(
+            #     o4_feat,
+            #     gt_labels_p,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
+            # loss_dict['loss_triplet_l5'] = triplet_loss(
+            #     o5_feat,
+            #     gt_labels_p,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
+            # loss_dict['loss_triplet_l6'] = triplet_loss(
+            #     o6_feat,
+            #     gt_labels_p,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
+            # loss_dict['loss_triplet_l7'] = triplet_loss(
+            #     o7_feat,
+            #     gt_labels_p,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
+            #
+            # loss_dict['loss_triplet_l8'] = triplet_loss(
+            #     o8_feat,
+            #     gt_labels_p,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
 
             # loss_dict['loss_triplet_l9'] = triplet_loss(
             #     o9_feat,
@@ -385,6 +404,61 @@ class Baseline(nn.Module):
                 tri_kwargs.get('margin'),
                 tri_kwargs.get('norm_feat'),
                 tri_kwargs.get('hard_mining')
-            ) * tri_kwargs.get('scale')
+            ) * 1
+            # loss_dict['loss_triplet_local_p'] = triplet_loss(
+            #     pred_features_p_local,
+            #     gt_labels_p,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
+            #
+            # loss_dict['loss_triplet_local_g'] = triplet_loss(
+            #     pred_features_g_local,
+            #     gt_labels_g,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
+
+            # loss_dict['loss_triplet_gc'] = triplet_loss(
+            #     pred_features_gc,
+            #     gt_labels_g,
+            #     tri_kwargs.get('margin'),
+            #     tri_kwargs.get('norm_feat'),
+            #     tri_kwargs.get('hard_mining')
+            # ) * tri_kwargs.get('scale')
+
+            # loss_dict['loss_kl'] = kl_loss(
+            #     pred_features_g,
+            #     pred_features_gc,
+            # ) * 0.01
+
+            # loss_dict['loss_mmd'] = self.mmd(
+            #     pred_features_g,
+            #     pred_features_gc,
+            # ) * 1e1
+
+
+
+        if 'CircleLoss' in loss_names:
+            circle_kwargs = self.loss_kwargs.get('circle')
+            loss_dict['loss_circle'] = pairwise_circleloss(
+                pred_features,
+                gt_labels,
+                circle_kwargs.get('margin'),
+                circle_kwargs.get('gamma')
+            ) * circle_kwargs.get('scale')
+
+        if 'Cosface' in loss_names:
+            cosface_kwargs = self.loss_kwargs.get('cosface')
+            loss_dict['loss_cosface'] = pairwise_cosface(
+                pred_features,
+                gt_labels,
+                cosface_kwargs.get('margin'),
+                cosface_kwargs.get('gamma'),
+            ) * cosface_kwargs.get('scale')
+
+
 
         return loss_dict

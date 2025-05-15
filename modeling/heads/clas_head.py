@@ -1,6 +1,13 @@
+# encoding: utf-8
+"""
+@author:  xingyu liao
+@contact: sherlockliao01@gmail.com
+"""
+
 import torch.nn.functional as F
 
-from ..heads import REID_HEADS_REGISTRY, EmbeddingHead
+from fastreid.modeling.heads import REID_HEADS_REGISTRY, EmbeddingHead
+
 
 @REID_HEADS_REGISTRY.register()
 class ClasHead(EmbeddingHead):

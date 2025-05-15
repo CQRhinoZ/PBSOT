@@ -1,5 +1,10 @@
+# encoding: utf-8
+"""
+@author:  liaoxingyu
+@contact: sherlockliao01@gmail.com
+"""
 
-from ..utils.registry import Registry
+from ...utils.registry import Registry
 
 REID_HEADS_REGISTRY = Registry("HEADS")
 REID_HEADS_REGISTRY.__doc__ = """
